@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*-coding:Utf-8 -*
 
+import sys, time, syslog
+from datetime import datetime, timedelta
 
-#import Adafruit_BMP.BMP085 as BMP085
+import Adafruit_BMP.BMP085 as BMP085
 import sqlite3
 import os
 
@@ -18,9 +20,17 @@ except sqlite3.OperationalError:
 
 
 #initialise un objet capteur
-#sensor = BMP085.BMP085()
+sensor = BMP085.BMP085()
+temperature = sensor.read_temperature()
+print(temperature)
+pression = sensor.read_pressure()/100
+print(pression)
+now = datetime.now()
+print(now)
 
-
+#row = {now, temperature, pression}
+db_cursor.execute("INSERT INTO logging VALUES(?, ?, ?)", (now,temperature,pression))
+db_connection.commit()
 #print 'Temperature = {0:0.3f} *C'.format(sensor.read_temperature())
 #0|datetime|TIMESTAMP|0||0
 #1|temp||0||0
