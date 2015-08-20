@@ -22,17 +22,11 @@ except sqlite3.OperationalError:
 #initialise un objet capteur
 sensor = BMP085.BMP085()
 temperature = sensor.read_temperature()
-print(temperature)
+#print(temperature)
 pression = sensor.read_pressure()/100
-print(pression)
+#print(pression)
 now = datetime.now()
-print(now)
+#print(now)
 
-#row = {now, temperature, pression}
 db_cursor.execute("INSERT INTO logging VALUES(?, ?, ?)", (now,temperature,pression))
 db_connection.commit()
-#print 'Temperature = {0:0.3f} *C'.format(sensor.read_temperature())
-#0|datetime|TIMESTAMP|0||0
-#1|temp||0||0
-#2|FLOAT||0||0
-#3|pressure|INT|0||0
