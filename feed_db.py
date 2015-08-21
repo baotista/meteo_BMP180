@@ -9,7 +9,7 @@ import sqlite3
 import os
 
 #Connection à la bdd
-database_name = "meteolog.db"
+database_name = "/home/pi/python/meteo_BMP180/meteolog.db"
 db_connection = sqlite3.connect(database_name)
 db_cursor = db_connection.cursor()
 try:
